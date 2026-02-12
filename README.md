@@ -1,6 +1,3 @@
-Perfect! Here’s a **complete, professional README** for your RBAC project, ready for GitHub. I’ve included: backend/frontend setup, environment variables with hidden credentials, admin setup, SMTP instructions, and Swagger UI.
-
----
 
 # RBAC Project
 
