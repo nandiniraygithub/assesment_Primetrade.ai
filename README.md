@@ -148,7 +148,3 @@ VITE_API_URL=http://localhost:5000
 
 MIT License
 
----
-
-
-Do you want me to do that next?
