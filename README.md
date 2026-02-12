@@ -1,4 +1,4 @@
-Got it! You want a **README** for your RBAC project, including instructions for running backend and frontend, plus handling the admin credentials and environment variables. Here’s a professional draft you can use and adapt:
+Perfect! Here’s a **complete, professional README** for your RBAC project, ready for GitHub. I’ve included: backend/frontend setup, environment variables with hidden credentials, admin setup, SMTP instructions, and Swagger UI.
 
 ---
 
@@ -18,6 +18,8 @@ It supports user registration, login, and admin-specific functionalities with pr
 * **Database:** MongoDB (Mongoose)
 * **Authentication:** JWT (JSON Web Tokens)
 * **Password Security:** bcrypt
+* **Email Notifications:** Nodemailer (SMTP)
+* **API Documentation:** Swagger UI
 
 ---
 
@@ -27,11 +29,12 @@ It supports user registration, login, and admin-specific functionalities with pr
 * Role-based access (User / Admin)
 * Protected routes for admin-only actions
 * CRUD operations for data entities
-* Environment variables for sensitive data
+* Password reset via email
+* API documentation with Swagger UI
 
 ---
 
-## Getting Started
+## Installation
 
 ### Prerequisites
 
@@ -41,9 +44,7 @@ It supports user registration, login, and admin-specific functionalities with pr
 
 ---
 
-### Installation
-
-#### Backend
+### Backend Setup
 
 ```bash
 # Navigate to backend folder
@@ -52,16 +53,27 @@ cd backend
 # Install dependencies
 npm install
 
-# Create a .env file in the backend folder with the following variables:
-# PORT=5000
-# MONGO_CONN=<Your MongoDB connection string>
-# JWT_SECRET=<Your JWT secret>
+# Create a .env file in the backend folder with the following:
+PORT=5000
+MONGO_URI=your_mongo_uri_here
+JWT_SECRET_KEY=your_jwt_secret_here
+JWT_EXPIRES_IN=30d
+COOKIE_EXPIRES_IN=30
+
+# SMTP Configuration for Email Sending
+SMTP_SERVICE=gmail
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_MAIL=your_email_here
+SMTP_PASSWORD=your_password_here
 
 # Run the backend server
 npm run dev
 ```
 
-#### Frontend
+---
+
+### Frontend Setup
 
 ```bash
 # Navigate to frontend folder
@@ -78,61 +90,80 @@ npm run dev
 
 ## Admin Credentials
 
-To create an initial admin account, you can either:
-
-**Option 1: Hardcode for testing (not recommended for production)**
+**Option 1: Hardcoded for testing (not recommended for production)**
 
 ```javascript
 const email = "admin@gmail.com";
 const passwordRaw = "123456";
 ```
 
-**Option 2: Use environment variables (recommended)**
-Add to your `.env` file:
+**Option 2: Environment variables (recommended)**
 
 ```env
 ADMIN_EMAIL=admin@gmail.com
 ADMIN_PASSWORD=123456
 ```
 
-Then in your backend, you can access them via `process.env.ADMIN_EMAIL` and `process.env.ADMIN_PASSWORD`.
-
----
-
-## Usage
-
-1. Run backend and frontend servers.
-2. Open frontend in browser (usually `http://localhost:3000`).
-3. Register as a user or use admin credentials to access protected routes.
+Access in backend via `process.env.ADMIN_EMAIL` and `process.env.ADMIN_PASSWORD`.
 
 ---
 
 ## Environment Variables
 
-**Backend `.env` example**
+### Backend `.env` Example
 
 ```env
-
 PORT=5000
 MONGO_URI=mongodb+srv://username:password@cluster0.mongodb.net/dbname
 JWT_SECRET_KEY=your_jwt_secret
 JWT_EXPIRES_IN=30d
 COOKIE_EXPIRES_IN=30
 
-# SMTP Configuration for Email Sending
+# SMTP Configuration
 SMTP_SERVICE=gmail
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
-SMTP_MAIL=your-email@gmail.com
-SMTP_PASSWORD=your-app-password
+SMTP_MAIL=your_email@gmail.com
+SMTP_PASSWORD=your_app_password
 
+# Admin
+ADMIN_EMAIL=admin@gmail.com
+ADMIN_PASSWORD=123456
 ```
 
-**Frontend `.env` example (if needed)**
+> **Security Tip:** Add `.env` to `.gitignore` so sensitive info is never pushed to GitHub. Use `.env.example` for collaborators.
 
-```env
-VITE_API_URL=http://localhost:5000
+---
+
+## API Documentation (Swagger UI)
+
+This project uses **Swagger UI** for interactive API documentation.
+
+**Access Swagger UI:**
+
 ```
+http://localhost:5000/api-docs/
+```
+
+### Features in Swagger UI:
+
+* View all API endpoints (Auth, Users, Admin, etc.)
+* Check request parameters and responses
+* Test APIs directly from the browser
+
+### How to Use:
+
+1. Run the backend server (`npm run dev`).
+2. Open the URL in your browser.
+3. Explore and test APIs interactively.
+
+---
+
+## Usage
+
+1. Start backend and frontend servers.
+2. Open frontend in browser (usually `http://localhost:3000`).
+3. Register as a user or use admin credentials to access protected routes.
 
 ---
 
@@ -147,4 +178,6 @@ VITE_API_URL=http://localhost:5000
 ## License
 
 MIT License
+
+---
 
